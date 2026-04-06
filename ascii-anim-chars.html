@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ASCII Animation Characters — Complete Reference</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg0: #0f0e0d;
+  --bg1: #1a1917;
+  --bg2: #222120;
+  --bg3: #2d2b29;
+  --bg4: #3a3836;
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.13);
+  --border3: rgba(255,255,255,0.20);
+  --text0: #f0ede8;
+  --text1: #b0aca6;
+  --text2: #6a6762;
+  --text3: #454340;
+  --accent: #c8a060;
+  --accent-dim: rgba(200,160,96,0.12);
+  --accent-border: rgba(200,160,96,0.35);
+  --green: #5a8a5a;
+  --green-dim: rgba(90,138,90,0.12);
+  --blue: #4a78b0;
+  --blue-dim: rgba(74,120,176,0.12);
+  --red: #a05050;
+  --red-dim: rgba(160,80,80,0.12);
+  --mono: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+  --sym: 'Segoe UI Symbol', 'Noto Sans Symbols 2', 'Noto Sans Symbols', 'Apple Symbols', 'DejaVu Sans', sans-serif;
+  --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+html { font-size: 13px; }
+
+body {
+  background: var(--bg0);
+  color: var(--text0);
+  font-family: var(--sans);
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg0); }
+::-webkit-scrollbar-thumb { background: var(--bg4); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #5a5855; }
+
+/* ── HEADER ── */
+header {
+  padding: 1.25rem 1.75rem 0.875rem;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: rgba(15,14,13,0.95);
+  z-index: 200;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.header-top {
+  display: flex;
+  align-items: baseline;
+  gap: 0.875rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+h1 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text0);
+  letter-spacing: -0.02em;
+  font-family: var(--mono);
+}
+
+.header-sub {
+  font-size: 0.75rem;
+  color: var(--text2);
+}
+
+.search-row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+#search {
+  width: 280px;
+  background: var(--bg2);
+  border: 1px solid var(--border2);
+  border-radius: 7px;
+  padding: 0.4rem 0.7rem;
+  color: var(--text0);
+  font-size: 0.8rem;
+  font-family: var(--sans);
+  outline: none;
+  transition: border-color 0.15s, background 0.15s;
+}
+#search::placeholder { color: var(--text3); }
+#search:focus {
+  border-color: var(--accent-border);
+  background: var(--bg3);
+}
+
+.stats { font-size: 0.72rem; color: var(--text2); }
+
+.header-hint {
+  font-size: 0.68rem;
+  color: var(--text3);
+}
+
+/* ── FILTER BAR ── */
+#filters {
+  padding: 0.6rem 1.75rem;
+  display: flex;
+  gap: 0.375rem;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--border);
+  background: rgba(15,14,13,0.92);
+  position: sticky;
+  top: 88px;
+  z-index: 199;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.filter-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 0.2rem 0.55rem;
+  font-size: 0.68rem;
+  color: var(--text2);
+  cursor: pointer;
+  transition: all 0.12s;
+  white-space: nowrap;
+  font-family: var(--sans);
+  letter-spacing: 0.01em;
+}
+.filter-btn:hover { border-color: var(--border2); color: var(--text1); background: var(--bg2); }
+.filter-btn.active {
+  background: var(--accent-dim);
+  border-color: var(--accent-border);
+  color: var(--accent);
+}
+
+/* ── MAIN GRID ── */
+#grid {
+  padding: 1.25rem 1.75rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 0.875rem;
+  align-items: start;
+}
+
+/* ── CARD ── */
+.card {
+  background: var(--bg1);
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  padding: 0.875rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: border-color 0.15s;
+}
+.card:hover { border-color: var(--border2); }
+
+.card-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.card-title {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text1);
+  font-family: var(--mono);
+}
+
+.card-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.range-label {
+  font-size: 0.62rem;
+  color: var(--text3);
+  font-family: var(--mono);
+}
+
+.char-count {
+  font-size: 0.62rem;
+  color: var(--text3);
+  background: var(--bg3);
+  padding: 0.1rem 0.35rem;
+  border-radius: 3px;
+  font-family: var(--mono);
+}
+
+/* TAGS */
+.tags {
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  font-size: 0.62rem;
+  background: var(--bg3);
+  color: var(--text2);
+  padding: 0.12rem 0.4rem;
+  border-radius: 3px;
+  border: 1px solid var(--border);
+}
+
+/* USE NOTE */
+.use-note {
+  font-size: 0.7rem;
+  color: var(--text2);
+  line-height: 1.5;
+}
+
+/* FONT NOTE */
+.font-note {
+  font-size: 0.65rem;
+  color: var(--accent);
+  background: var(--accent-dim);
+  border: 1px solid var(--accent-border);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+}
+
+/* COPY ALL BTN */
+.copy-all-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.15rem 0.45rem;
+  font-size: 0.62rem;
+  color: var(--text2);
+  cursor: pointer;
+  font-family: var(--sans);
+  transition: all 0.12s;
+  white-space: nowrap;
+}
+.copy-all-btn:hover { border-color: var(--border2); color: var(--text0); background: var(--bg3); }
+
+/* CHARS */
+.chars {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 0.25rem 0;
+}
+
+.ch {
+  font-family: var(--sym);
+  font-size: 1.1rem;
+  line-height: 1;
+  padding: 3px 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.08s, transform 0.08s;
+  border: 1px solid transparent;
+  user-select: none;
+  min-width: 26px;
+  text-align: center;
+  display: inline-block;
+  color: var(--text0);
+}
+.ch:hover {
+  background: var(--bg3);
+  border-color: var(--border2);
+}
+.ch.pop {
+  animation: pop 0.22s ease-out;
+}
+@keyframes pop {
+  0% { transform: scale(1.6); background: var(--accent-dim); border-color: var(--accent-border); }
+  60% { transform: scale(0.95); }
+  100% { transform: scale(1); background: transparent; }
+}
+
+/* COLLAPSE for very large groups */
+.chars-wrap { position: relative; }
+.chars-wrap.collapsed .chars { max-height: 120px; overflow: hidden; }
+.chars-wrap.collapsed::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 50px;
+  background: linear-gradient(transparent, var(--bg1));
+  pointer-events: none;
+}
+.expand-btn {
+  display: none;
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-radius: 4px;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.68rem;
+  color: var(--text1);
+  cursor: pointer;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-family: var(--sans);
+  transition: background 0.12s;
+}
+.expand-btn:hover { background: var(--bg4); }
+.chars-wrap.collapsed + .expand-btn { display: block; }
+
+/* SEQUENCES */
+.seqs {
+  border-top: 1px solid var(--border);
+  padding-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.seqs-title {
+  font-size: 0.6rem;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.1rem;
+}
+
+.seq-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.seq-label {
+  font-size: 0.62rem;
+  color: var(--text3);
+  min-width: 76px;
+  padding-top: 0.2rem;
+  flex-shrink: 0;
+  line-height: 1.3;
+}
+
+.seq-chars {
+  font-family: var(--sym);
+  font-size: 0.95rem;
+  color: var(--text1);
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  padding: 0.15rem 0.35rem;
+  border-radius: 4px;
+  transition: background 0.1s, color 0.1s;
+  word-break: break-all;
+  line-height: 1.6;
+  white-space: pre;
+  border: 1px solid transparent;
+}
+.seq-chars:hover {
+  background: var(--bg3);
+  color: var(--text0);
+  border-color: var(--border2);
+}
+
+/* ── TOAST ── */
+#toast {
+  position: fixed;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  background: var(--bg4);
+  border: 1px solid var(--border3);
+  border-radius: 8px;
+  padding: 0.45rem 0.875rem;
+  font-size: 0.78rem;
+  color: var(--text0);
+  opacity: 0;
+  transform: translateY(8px) scale(0.97);
+  transition: opacity 0.15s, transform 0.15s;
+  pointer-events: none;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  max-width: 280px;
+}
+#toast.show { opacity: 1; transform: translateY(0) scale(1); }
+#toast-char {
+  font-family: var(--sym);
+  font-size: 1.2rem;
+  min-width: 1.4rem;
+  text-align: center;
+}
+#toast-msg { color: var(--text1); }
+
+/* ── HIDDEN ── */
+.card.hidden { display: none; }
+
+/* ── FOOTER ── */
+footer {
+  padding: 1.5rem 1.75rem;
+  text-align: center;
+  font-size: 0.68rem;
+  color: var(--text3);
+  border-top: 1px solid var(--border);
+  line-height: 2;
+}
+footer code {
+  font-family: var(--mono);
+  background: var(--bg3);
+  padding: 0.1rem 0.3rem;
+  border-radius: 3px;
+  color: var(--text2);
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-top">
+    <h1>// ASCII Animation Characters</h1>
+    <span class="header-sub">Complete Unicode reference — terminal &amp; ASCII game dev</span>
+  </div>
+  <div class="search-row">
+    <input type="text" id="search" placeholder="Filter categories or tags…" autocomplete="off" spellcheck="false">
+    <span class="stats" id="stats">Loading…</span>
+    <span class="header-hint">Click char to copy · Click sequence to copy string · Hover for code point</span>
+  </div>
+</header>
+
+<div id="filters"></div>
+<div id="grid"></div>
+
+<div id="toast">
+  <span id="toast-char"></span>
+  <span id="toast-msg">Copied!</span>
+</div>
+
+<footer id="footer">
+  Click any character to copy to clipboard &nbsp;·&nbsp;
+  Click a sequence string to copy the whole thing &nbsp;·&nbsp;
+  Hover over a char to see its Unicode code point &nbsp;·&nbsp;
+  <br>
+  For Symbols for Legacy Computing, install <code>Noto Sans Symbols 2</code> &nbsp;·&nbsp;
+  Combining diacriticals shown on <code>◌</code> placeholder — only the diacritic is copied
+  <br>
+  <span id="footer-total"></span>
+</footer>
+
+<script>
+'use strict';
+
+// ── Helpers ──────────────────────────────────────────────────────────────
+function fromRange(start, end, exclude) {
+  exclude = exclude || [];
+  const out = [];
+  for (let cp = start; cp <= end; cp++) {
+    if (!exclude.includes(cp)) out.push(String.fromCodePoint(cp));
+  }
+  return out;
+}
+
+function cpLabel(c) {
+  const cp = c.codePointAt(0);
+  const hex = cp.toString(16).toUpperCase();
+  return 'U+' + (hex.length > 4 ? hex : hex.padStart(4, '0'));
+}
+
+// ── Group Definitions ────────────────────────────────────────────────────
+const GROUPS = [
+
+  // ── BLOCK ELEMENTS
+  {
+    id: 'block', title: 'Block Elements', range: 'U+2580–259F',
+    tags: ['fill', 'terrain', 'walls', 'health bars', 'fog of war', 'density'],
+    note: 'The core workhorse of ASCII animation. Shade ramps for fog/distance, height bars for stats, half-blocks for sub-row pixel placement.',
+    chars: fromRange(0x2580, 0x259F),
+    sequences: [
+      { label: 'Fade ramp',  s: ' ░▒▓█▓▒░ ' },
+      { label: 'Height bar', s: '▁▂▃▄▅▆▇█' },
+      { label: 'H-scan',     s: '▏▎▍▌▋▊▉█' },
+      { label: 'Half blocks', s: '▀▄▌▐' },
+      { label: 'Corner quad', s: '▖▗▘▝' },
+      { label: 'L-shapes',  s: '▙▛▜▟▚▞' },
+    ]
+  },
+
+  // ── BOX DRAWING
+  {
+    id: 'box', title: 'Box Drawing', range: 'U+2500–257F',
+    tags: ['UI chrome', 'rooms', 'corridors', 'borders', 'schematics', 'wiring', 'dungeon'],
+    note: 'Room walls, dungeon corridors, terminal HUD chrome. Mix single/double/heavy/dashed/rounded styles for visual hierarchy.',
+    chars: fromRange(0x2500, 0x257F),
+    sequences: [
+      { label: 'Single box',   s: '┌─┬─┐\n│ │ │\n├─┼─┤\n└─┴─┘' },
+      { label: 'Double box',   s: '╔═╦═╗\n║ ║ ║\n╠═╬═╣\n╚═╩═╝' },
+      { label: 'Heavy box',    s: '┏━┳━┓\n┃ ┃ ┃\n┣━╋━┫\n┗━┻━┛' },
+      { label: 'Rounded box',  s: '╭─┬─╮\n│ │ │\n╰─┴─╯' },
+      { label: 'Dashed H',     s: '╌╌╌╌  ┄┄┄┄  ╍╍╍╍  ┅┅┅┅' },
+      { label: 'Dashed V',     s: '╎ ┆ ╏ ┇' },
+      { label: 'Half cross',   s: '╴╵╶╷╸╹╺╻' },
+      { label: 'Mixed cross',  s: '╟╢╤╧╪╫╬' },
+    ]
+  },
+
+  // ── GEOMETRIC SHAPES
+  {
+    id: 'geo', title: 'Geometric Shapes', range: 'U+25A0–25FF',
+    tags: ['particles', 'projectiles', 'bullets', 'spinners', 'rotation', 'circles', 'triangles'],
+    note: 'Quarter-circle fills make excellent rotation animations. Pie-fill sequence mimics charging/loading. Triangles for directional projectiles.',
+    chars: fromRange(0x25A0, 0x25FF),
+    sequences: [
+      { label: 'Circle pulse',  s: '○◌●◎○◌' },
+      { label: 'Quad spin',     s: '◐◓◑◒◐◓◑◒' },
+      { label: 'Arc spin',      s: '◜◝◞◟◜◝◞◟' },
+      { label: 'Pie charge',    s: '○◔◑◕●◕◑◔○' },
+      { label: 'Diamond pulse', s: '◇◈◆◈◇' },
+      { label: 'Triangle rot',  s: '▲▶▼◀▲▶▼◀' },
+      { label: 'Small tri rot', s: '▴▸▾◂▴▸▾◂' },
+      { label: 'Square fill',   s: '□◱▣◪◩▤▥▦▧▨▩■' },
+      { label: 'Corner fill',   s: '◢◣◤◥' },
+    ]
+  },
+
+  // ── BRAILLE PATTERNS
+  {
+    id: 'braille', title: 'Braille Patterns', range: 'U+2800–28FF',
+    tags: ['sub-char resolution', 'smooth gradients', 'maps', 'terrain', 'noise', 'fog of war', 'density fields'],
+    note: 'Each cell is a 2×4 dot grid — fake sub-character pixel resolution. Excellent for smooth density ramps, terrain normal maps, and noise fields.',
+    chars: fromRange(0x2800, 0x28FF),
+    sequences: [
+      { label: 'Density ramp',  s: '⠀⠁⠃⠇⠏⠟⠿⣿' },
+      { label: 'Fill ramp',     s: '⣀⣄⣤⣦⣶⣷⣿' },
+      { label: 'Shockwave',     s: '⠀⢀⣀⣠⣤⣶⣿⣶⣤⣠⣀⢀⠀' },
+      { label: 'Noise sample',  s: '⡇⢸⡱⢎⡔⢊⡍⢋⡇⢸' },
+      { label: 'Scanline',      s: '⡤⡤⡤⡤⡤⡤⡤⡤' },
+      { label: 'Rain drop',     s: '⠂⠆⠖⠶⢶⣶⣧⣤⣀⠀' },
+    ]
+  },
+
+  // ── ARROWS
+  {
+    id: 'arrows', title: 'Arrows', range: 'U+2190–21FF',
+    tags: ['direction', 'movement', 'velocity vectors', 'UI indicators', 'compass', 'rotation'],
+    note: 'Full BMP arrow set — single, double, dashed, triple, harpoon variants. Use for movement vectors, radar sweeps, and directional HUD indicators.',
+    chars: fromRange(0x2190, 0x21FF),
+    sequences: [
+      { label: '8-dir spin',   s: '↑↗→↘↓↙←↖↑' },
+      { label: 'Double spin',  s: '⇑⇗⇒⇘⇓⇙⇐⇖⇑' },
+      { label: 'H bounce',     s: '←→←→←→' },
+      { label: 'Rotation CW',  s: '↻↻↻↻' },
+      { label: 'Rotation CCW', s: '↺↺↺↺' },
+      { label: 'Paired H',     s: '⇄⇆⇌⇋' },
+      { label: 'Harpoons',     s: '↼↽↾↿⇀⇁⇂⇃' },
+    ]
+  },
+
+  // ── SUPPLEMENTAL ARROWS-A
+  {
+    id: 'suparrows-a', title: 'Supplemental Arrows-A', range: 'U+27F0–27FF',
+    tags: ['long arrows', 'compound arrows', 'looping', 'wide arrows'],
+    note: 'Long-shaft and looping arrow forms. ⟲⟳ are great for rotation/reload indicators.',
+    chars: fromRange(0x27F0, 0x27FF),
+    sequences: [
+      { label: 'Loop pair',   s: '⟲⟳⟲⟳' },
+      { label: 'Long LR',    s: '⟵⟶⟷' },
+      { label: 'Map to',     s: '⟼⟻⟽⟾⟿' },
+    ]
+  },
+
+  // ── SUPPLEMENTAL ARROWS-B
+  {
+    id: 'suparrows-b', title: 'Supplemental Arrows-B', range: 'U+2900–297F',
+    tags: ['decorative arrows', 'tailed', 'squiggly', 'curved', 'multi-head'],
+    note: 'Extended arrow repertoire — tailed, squiggly, curved, and multi-headed variants. Rich options for trajectory and flow indicators.',
+    chars: fromRange(0x2900, 0x297F),
+    sequences: [
+      { label: 'Tailed R',    s: '⤀⤁⤂⤃⤄⤅' },
+      { label: 'Bent',        s: '⤴⤵⤶⤷⤸⤹' },
+      { label: 'Squiggle',    s: '⤳⤿⥇⥈' },
+    ]
+  },
+
+  // ── MISC SYMBOLS AND ARROWS (2B block)
+  {
+    id: 'misc-arrows', title: 'Misc Symbols & Arrows', range: 'U+2B00–2BFF',
+    tags: ['arrows', 'stars', 'pentagons', 'circles', 'extended shapes', 'rewind', 'media'],
+    note: 'Extended arrows plus shapes not found in other blocks — pentagons, chevrons, wide arrows, directional triangles.',
+    chars: fromRange(0x2B00, 0x2BFF),
+    sequences: [
+      { label: 'Fat arrows',   s: '⬆⬇⬈⬉⬊⬋⬌⬍' },
+      { label: 'Triangles',    s: '⭠⭡⭢⭣⭤⭥' },
+      { label: 'Stars',        s: '⭐⭑⭒✦✧' },
+      { label: 'Pentagons',    s: '⬠⬡⬢⬣⬤⬥⬦⬧⬨⬩' },
+      { label: 'Arrows wide',  s: '🡐🡑🡒🡓' },
+    ]
+  },
+
+  // ── DINGBATS
+  {
+    id: 'dingbats', title: 'Dingbats', range: 'U+2700–27BF',
+    tags: ['stars', 'sparkle', 'snowflakes', 'crosses', 'bullets', 'explosions', 'ornaments'],
+    note: 'Stars and asterisks make excellent explosion/sparkle frames. Snowflakes for ice effects. Cross forms for radar pings and targeting.',
+    chars: fromRange(0x2700, 0x27BF),
+    sequences: [
+      { label: 'Star pulse',   s: '·✦·✧·★·✧·✦·' },
+      { label: 'Snowflake',    s: '❄❅❆❄❅❆' },
+      { label: 'Asterisk ramp',s: '✱✲✳✴✵✶✷✸✹✺' },
+      { label: 'Cross spin',   s: '✙✚✛✜✙✚✛✜' },
+      { label: 'Sparkle burst',s: '✶✸✺✼✺✸✶' },
+      { label: 'Arrow bullets',s: '➔➜➝➞➟➠➡➢➣➤➥➦' },
+      { label: 'Pen/writing',  s: '✎✏✐✑✒' },
+      { label: 'Scissors',     s: '✁✂✃✄' },
+    ]
+  },
+
+  // ── MISC SYMBOLS
+  {
+    id: 'misc-sym', title: 'Misc Symbols', range: 'U+2600–26FF',
+    tags: ['weather', 'astrology', 'warning', 'chess', 'cards', 'dice', 'music', 'hazard', 'icons'],
+    note: 'Rich icon set — weather effects, die faces, warning symbols, chess pieces, card suits, recycling/hazard symbols, and music notes.',
+    chars: fromRange(0x2600, 0x26FF),
+    sequences: [
+      { label: 'Weather',      s: '☀☁☂☃☄' },
+      { label: 'Die faces',    s: '⚀⚁⚂⚃⚄⚅' },
+      { label: 'Hazard',       s: '⚠⚡☢☣' },
+      { label: 'Chess set',    s: '♔♕♖♗♘♙♚♛♜♝♞♟' },
+      { label: 'Card suits',   s: '♠♡♢♣♤♥♦♧' },
+      { label: 'Music',        s: '♩♪♫♬♭♮♯' },
+      { label: 'Recycling',    s: '♻♲♳♴♵♶♷♸♹♺' },
+      { label: 'Moon phases',  s: '☽☾' },
+    ]
+  },
+
+  // ── MISC TECHNICAL
+  {
+    id: 'misc-tech', title: 'Misc Technical', range: 'U+2300–23FF',
+    tags: ['terminal', 'keyboard', 'circuit', 'hourglass', 'target', 'APL', 'technical'],
+    note: 'Technical and keyboard symbols. ⌛⧗ for timers, ⌀ for targeting reticles, ⌨ for terminal effects. APL-derived symbols for circuit aesthetics.',
+    chars: fromRange(0x2300, 0x23FF),
+    sequences: [
+      { label: 'Hourglass',    s: '⌛⧗⌛⧖⌛⧗' },
+      { label: 'Circle ops',   s: '⊙⊚⊛⊜⊝' },
+      { label: 'Angle bracket',s: '⌈⌉⌊⌋' },
+      { label: 'APL grid',     s: '⍟⍬⍥⍤⍣⍢⍡' },
+      { label: 'Keyboard',     s: '⌃⌘⌥⌫⌦⌧⏎' },
+    ]
+  },
+
+  // ── MATH OPERATORS
+  {
+    id: 'math', title: 'Math Operators', range: 'U+2200–22FF',
+    tags: ['math', 'logic', 'notation', 'dot arrays', 'infinity', 'therefore'],
+    note: 'Dot arrays (∷⋮⋯⋰⋱) useful for ellipsis animations and HUD overlays. Integral/sum signs for decorative terminal chrome.',
+    chars: fromRange(0x2200, 0x22FF),
+    sequences: [
+      { label: 'Dot arrays',   s: '∴∵∶∷⋮⋯⋰⋱' },
+      { label: 'Infinity',     s: '∞∝∿≀' },
+      { label: 'Circle ops',   s: '⊕⊖⊗⊘⊙⊚⊛⊜⊝' },
+      { label: 'Box ops',      s: '⊞⊟⊠⊡' },
+      { label: 'Set bracket',  s: '⟨⟩⟦⟧⟮⟯' },
+    ]
+  },
+
+  // ── LETTERLIKE SYMBOLS
+  {
+    id: 'letterlike', title: 'Letterlike Symbols', range: 'U+2100–214F',
+    tags: ['script', 'black-letter', 'double-struck', 'styled text', 'notation', 'glitch HUD'],
+    note: 'Script, Fraktur, and double-struck letter variants. Use for styled HUD fonts, credit labels, or cipher glitch overlays.',
+    chars: fromRange(0x2100, 0x214F),
+    sequences: [
+      { label: 'Blackboard',   s: 'ℂℍℕℙℚℝℤ' },
+      { label: 'Script',       s: 'ℋℐℒℓℳℛ' },
+      { label: 'Fraktur',      s: 'ℌℑℜℨ' },
+    ]
+  },
+
+  // ── NUMBER FORMS
+  {
+    id: 'numforms', title: 'Number Forms', range: 'U+2150–218F',
+    tags: ['fractions', 'Roman numerals', 'counters', 'timers', 'resource display'],
+    note: 'Vulgar fractions for resource bars. Roman numerals for chapter/level labels or classical UI aesthetics.',
+    chars: fromRange(0x2150, 0x218F),
+    sequences: [
+      { label: 'Fractions',    s: '¼½¾⅓⅔⅛⅜⅝⅞⅙⅚' },
+      { label: 'Roman upper',  s: 'ⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩⅪⅫ' },
+      { label: 'Roman lower',  s: 'ⅰⅱⅲⅳⅴⅵⅶⅷⅸⅹⅺⅻ' },
+    ]
+  },
+
+  // ── ENCLOSED ALPHANUMERICS
+  {
+    id: 'enclosed', title: 'Enclosed Alphanumerics', range: 'U+2460–24FF',
+    tags: ['circled numbers', 'badges', 'counters', 'UI labels', 'enclosed letters'],
+    note: 'Circled and parenthesized numbers/letters. Good for status counters, key binding hints, and badge indicators.',
+    chars: fromRange(0x2460, 0x24FF),
+    sequences: [
+      { label: 'Open 1–10',    s: '①②③④⑤⑥⑦⑧⑨⑩' },
+      { label: 'Filled 1–10',  s: '❶❷❸❹❺❻❼❽❾❿' },
+      { label: 'Circled A–J',  s: 'ⒶⒷⒸⒹⒺⒻⒼⒽⒾⒿ' },
+      { label: 'Open A–J',     s: 'ⓐⓑⓒⓓⓔⓕⓖⓗⓘⓙ' },
+      { label: 'Neg circled',  s: '⓪①②③④⑤⑥⑦⑧⑨' },
+    ]
+  },
+
+  // ── HALF-WIDTH KATAKANA
+  {
+    id: 'halfkata', title: 'Half-width Katakana', range: 'U+FF65–FF9F',
+    tags: ['Matrix rain', 'glitch', 'CRT', 'cyberpunk', 'ghost', 'noise', 'static', 'Fallout terminal'],
+    note: 'The secret ingredient in Matrix-style rain and CRT ghost noise. Half-width means they pack cleanly into monospace grids. Perfect for Fallout CRT terminal aesthetics.',
+    chars: fromRange(0xFF65, 0xFF9F),
+    sequences: [
+      { label: 'Rain column',  s: 'ｶﾀｶﾅ ﾏﾄﾘｯｸｽ' },
+      { label: 'Glitch burst', s: 'ﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙ' },
+      { label: 'Punctuation',  s: '｡｢｣､･ｦｧｨｩｪｫｬｭｮｯ' },
+    ]
+  },
+
+  // ── FULLWIDTH LATIN & DIGITS
+  {
+    id: 'fullwidth', title: 'Fullwidth Latin & Digits', range: 'U+FF01–FF5E',
+    tags: ['wide chars', 'bold look', 'CJK spacing', 'stylized', 'display text'],
+    note: 'Full-width (2-column) Latin. Mix with katakana for consistent terminal-width styling. Wide digits perfect for scoreboards.',
+    chars: fromRange(0xFF01, 0xFF5E),
+    sequences: [
+      { label: 'Wide digits',  s: '０１２３４５６７８９' },
+      { label: 'Wide alpha',   s: 'ＡＢＣＤＥＦ' },
+      { label: 'Wide punct',   s: '！＃＄％＆＊＋－' },
+    ]
+  },
+
+  // ── RUNIC
+  {
+    id: 'runic', title: 'Runic', range: 'U+16A0–16F8',
+    tags: ['fantasy', 'magic', 'glitch', 'alien', 'inscriptions', 'Norse', 'rune overlay'],
+    note: 'Gives alien/Norse fantasy feel. Mix with Latin chars for cipher/glitch text overlays. Great for spell-casting and enchantment animations.',
+    chars: fromRange(0x16A0, 0x16F8),
+    sequences: [
+      { label: 'Elder Futhark', s: 'ᚠᚢᚦᚨᚱᚲᚷᚹᚺᚾᛁᛃᛇᛈᛉᛊᛏᛒᛖᛗᛚᛜᛞᛟ' },
+      { label: 'Cipher anim',  s: 'ᚠᚡᚢᚣᚤᚥᚦᚧᚨᚩᚪᚫᚬᚭᚮᚯᚰᚱ' },
+    ]
+  },
+
+  // ── OGHAM
+  {
+    id: 'ogham', title: 'Ogham', range: 'U+1680–169C',
+    tags: ['druidic', 'tree shapes', 'vertical patterns', 'alien', 'comb shapes', 'fantasy'],
+    note: 'Vertical stroke patterns — looks like tree carvings or alien script. The comb-like forms create interesting vertical scanline textures.',
+    chars: [' ', ...fromRange(0x1681, 0x169C)],
+    sequences: [
+      { label: 'Full set',     s: '᚛ᚁᚂᚃᚄᚅᚆᚇᚈᚉᚊᚋᚌᚍᚎᚏᚐᚑᚒᚓᚔᚕᚖᚗᚘᚙᚚ᚜' },
+    ]
+  },
+
+  // ── COMBINING DIACRITICALS
+  {
+    id: 'combining', title: 'Combining Diacriticals', range: 'U+0300–036F',
+    tags: ['stacking', 'zalgo', 'glitch text', 'cursed', 'overlay', 'distortion'],
+    note: 'Stack multiple diacriticals on one character for "zalgo" distortion effects. Shown on ◌ placeholder — only the diacritic is copied when you click.',
+    chars: fromRange(0x0300, 0x036F).map(function(c) { return '◌' + c; }),
+    sequences: [
+      { label: 'Zalgo hi',     s: 'H̷̢̡̺͇͔͙͖̿̽͑̆͊͘͝ͅE̸̡͍̼̖̯̒̽L̵̡̲͓͑L̴͇̃̉Ō̷͙͔̅' },
+      { label: 'Accent ring',  s: 'à á â ã ä å' },
+      { label: 'Under-dots',   s: 'ạ ẹ ị ọ ụ' },
+    ]
+  },
+
+  // ── SYMBOLS FOR LEGACY COMPUTING
+  {
+    id: 'legacy', title: 'Symbols for Legacy Computing', range: 'U+1FB00–1FBCA',
+    tags: ['mosaic', 'sextant blocks', 'sub-char resolution', 'C64', 'teletext', 'retro', '6-segment fill'],
+    note: 'Sextant/mosaic chars divide a cell into 6 regions (2×3) — finer resolution than standard block elements. Originally from C64, Teletext, and legacy terminal charsets.',
+    fontNote: 'Requires: Noto Sans Symbols 2 (install from fonts.google.com)',
+    chars: fromRange(0x1FB00, 0x1FBCA),
+    sequences: [
+      { label: 'Sextant fill',  s: String.fromCodePoint(0x1FB00,0x1FB01,0x1FB02,0x1FB03,0x1FB04,0x1FB05,0x1FB06,0x1FB07,0x1FB08,0x1FB09,0x1FB0A,0x1FB0B,0x1FB0C,0x1FB0D,0x1FB0E,0x1FB0F) },
+      { label: 'Block variants', s: String.fromCodePoint(0x1FB70,0x1FB71,0x1FB72,0x1FB73,0x1FB74,0x1FB75,0x1FB76,0x1FB77,0x1FB78,0x1FB79,0x1FB7A,0x1FB7B) },
+    ]
+  },
+
+  // ── GEOMETRIC SHAPES EXTENDED
+  {
+    id: 'geo-ext', title: 'Geometric Shapes Extended', range: 'U+1F780–1F7FF',
+    tags: ['small squares', 'small circles', 'small triangles', 'asterisks', 'extra geometry'],
+    note: 'Additional geometry not in the base block — smaller, more varied, including multi-pointed asterisks perfect for sparkle and explosion frames.',
+    chars: fromRange(0x1F780, 0x1F7FF),
+    sequences: [
+      { label: 'Sm squares',   s: String.fromCodePoint(0x1F790,0x1F791,0x1F792,0x1F793,0x1F794,0x1F795,0x1F796,0x1F797) },
+      { label: 'Asterisks',    s: String.fromCodePoint(0x1F7B5,0x1F7B6,0x1F7B7,0x1F7B8,0x1F7B9,0x1F7BA,0x1F7BB,0x1F7BC,0x1F7BD,0x1F7BE,0x1F7BF) },
+    ]
+  },
+
+  // ── SUPPLEMENTAL ARROWS-C
+  {
+    id: 'suparrows-c', title: 'Supplemental Arrows-C', range: 'U+1F800–1F8FF',
+    tags: ['arrows', 'wide arrows', 'wedge arrows', 'decorative'],
+    note: 'More arrow variants — wide, wedge-headed, and decorative forms. Useful for dramatic directional effects.',
+    chars: (function() {
+      var out = [];
+      for (var cp = 0x1F800; cp <= 0x1F8FF; cp++) {
+        try { out.push(String.fromCodePoint(cp)); } catch(e) {}
+      }
+      return out;
+    }()),
+    sequences: [
+      { label: 'Wide right',   s: String.fromCodePoint(0x1F800,0x1F801,0x1F802,0x1F803,0x1F804,0x1F805,0x1F806,0x1F807) },
+    ]
+  },
+
+  // ── ALCHEMICAL SYMBOLS
+  {
+    id: 'alchemical', title: 'Alchemical Symbols', range: 'U+1F700–1F77F',
+    tags: ['magic', 'RPG', 'alchemy', 'elements', 'planets', 'potions', 'fantasy', 'occult'],
+    note: 'Fire, water, earth, air, planetary symbols — original medieval alchemical notation. Great for RPG element status effects and magic UI.',
+    chars: fromRange(0x1F700, 0x1F77F),
+    sequences: [
+      { label: '4 elements',   s: String.fromCodePoint(0x1F701,0x1F702,0x1F703,0x1F704) },
+      { label: 'Planets',      s: String.fromCodePoint(0x1F728,0x1F729,0x1F72A,0x1F72B,0x1F72C,0x1F72D,0x1F72E) },
+    ]
+  },
+
+  // ── PLAYING CARDS
+  {
+    id: 'playing-cards', title: 'Playing Cards', range: 'U+1F0A0–1F0FF',
+    tags: ['cards', 'suits', 'deck', 'game', 'gambling'],
+    note: 'Full playing card deck including face-down card and jokers. Use for card-game UIs or randomness visualization.',
+    chars: fromRange(0x1F0A0, 0x1F0FF).filter(function(c) { return c.codePointAt(0) <= 0x1F0F5; }),
+    sequences: [
+      { label: 'Suits',        s: '♠♥♦♣' },
+      { label: 'Spades',       s: String.fromCodePoint(0x1F0A1,0x1F0A2,0x1F0A3,0x1F0A4,0x1F0A5,0x1F0A6,0x1F0A7,0x1F0A8,0x1F0A9,0x1F0AA,0x1F0AB,0x1F0AD,0x1F0AE) },
+      { label: 'Hearts',       s: String.fromCodePoint(0x1F0B1,0x1F0B2,0x1F0B3,0x1F0B4,0x1F0B5,0x1F0B6,0x1F0B7,0x1F0B8,0x1F0B9,0x1F0BA,0x1F0BB,0x1F0BD,0x1F0BE) },
+    ]
+  },
+
+  // ── DOMINO TILES
+  {
+    id: 'domino', title: 'Domino Tiles', range: 'U+1F030–1F093',
+    tags: ['domino', 'game tiles', 'dot pairs', 'grid patterns'],
+    note: 'Each tile shows a pair of die values (0–6). Interesting as dense graphical grid elements.',
+    chars: fromRange(0x1F030, 0x1F093),
+    sequences: []
+  },
+
+  // ── MAHJONG TILES
+  {
+    id: 'mahjong', title: 'Mahjong Tiles', range: 'U+1F000–1F02F',
+    tags: ['mahjong', 'East Asian', 'game tiles', 'dense icons'],
+    note: 'Mahjong suit and honor tiles. Each is a compact, visually distinct symbol useful for tile-based game representations.',
+    chars: fromRange(0x1F000, 0x1F02B),
+    sequences: []
+  },
+
+  // ── YIJING HEXAGRAMS
+  {
+    id: 'yijing', title: 'Yijing Hexagrams (I Ching)', range: 'U+4DC0–4DFF',
+    tags: ['I Ching', 'hexagrams', 'line patterns', 'mystical', 'oracular'],
+    note: '64 hexagram symbols built from stacked broken/unbroken lines. Every one is unique. Excellent for mystical/oracular terminal animations.',
+    chars: fromRange(0x4DC0, 0x4DFF),
+    sequences: [
+      { label: 'First 16',     s: '䷀䷁䷂䷃䷄䷅䷆䷇䷈䷉䷊䷋䷌䷍䷎䷏' },
+    ]
+  },
+
+  // ── TAI XUAN JING
+  {
+    id: 'tai-xuan', title: 'Tai Xuan Jing Symbols', range: 'U+1D300–1D356',
+    tags: ['tetragram', 'line patterns', 'triplets', 'Chinese', 'divination', 'dense lines'],
+    note: 'Monograms through tetragrams from broken/unbroken line combinations. Denser visual than hexagrams. Very striking as texture fill.',
+    chars: fromRange(0x1D300, 0x1D356),
+    sequences: [
+      { label: 'Mono/digrams', s: String.fromCodePoint(0x1D300,0x1D301,0x1D302,0x1D303,0x1D304,0x1D305,0x1D306,0x1D307,0x1D308,0x1D309) },
+    ]
+  },
+
+  // ── APL & CIRCLED OPERATORS
+  {
+    id: 'apl', title: 'APL Functional Symbols', range: 'U+2336–237A + circled ops',
+    tags: ['APL', 'technical', 'circuit-like', 'operators', 'special symbols'],
+    note: 'APL programming language symbols — circle/box operators with inner marks. Great circuit-board and schematic aesthetics.',
+    chars: [
+      ...fromRange(0x2336, 0x237A),
+      ...['⊕','⊖','⊗','⊘','⊙','⊚','⊛','⊜','⊝','⊞','⊟','⊠','⊡',
+         '⊢','⊣','⊤','⊥','⊦','⊧','⊨','⊩','⊪','⊫','⊬','⊭','⊮','⊯',
+         '⋄','⋅','⋆','⋇','⋈','⋉','⋊','⋋','⋌','⋍','⋎','⋏','⋐','⋑',
+         '⌶','⌷','⌸','⌹','⌺','⌻','⌼','⌽','⌾','⌿','⍀','⍁','⍂','⍃','⍄','⍅','⍆']
+    ],
+    sequences: [
+      { label: 'Circle ops',   s: '⊕⊖⊗⊘⊙⊚⊛⊜⊝' },
+      { label: 'Box ops',      s: '⊞⊟⊠⊡' },
+      { label: 'Turnstiles',   s: '⊢⊣⊤⊥' },
+    ]
+  },
+
+  // ── ENCLOSED ALPHANUMERIC SUPPLEMENT
+  {
+    id: 'enclosed-supp', title: 'Enclosed Alphanumeric Supplement', range: 'U+1F100–1F1FF',
+    tags: ['keycap', 'digits', 'regional indicators', 'circled', 'enclosed extra'],
+    note: 'Additional enclosed digits and regional indicator letters. Keycap-style digits work well for keyboard shortcut hints in HUDs.',
+    chars: fromRange(0x1F100, 0x1F1E5),
+    sequences: [
+      { label: 'Keycap 0–9',   s: String.fromCodePoint(0x1F101,0x1F102,0x1F103,0x1F104,0x1F105,0x1F106,0x1F107,0x1F108,0x1F109,0x1F10A) },
+    ]
+  },
+
+  // ── MUSICAL SYMBOLS
+  {
+    id: 'music', title: 'Musical Symbols', range: 'U+1D100–1D1FF',
+    tags: ['music notation', 'notes', 'clefs', 'rhythm', 'score', 'bars'],
+    note: 'Full musical notation set. Note values animate nicely in sequence as rhythm visualizations.',
+    chars: fromRange(0x1D100, 0x1D1E8),
+    sequences: [
+      { label: 'Clefs',        s: String.fromCodePoint(0x1D11E,0x1D122,0x1D123) },
+      { label: 'Notes',        s: String.fromCodePoint(0x1D157,0x1D158,0x1D159,0x1D15C,0x1D15D,0x1D15E,0x1D15F) },
+    ]
+  },
+
+  // ── ANCIENT SYMBOLS / PHAISTOS DISC
+  {
+    id: 'ancient', title: 'Aegean Numbers & Ancient Symbols', range: 'U+10100–1013F',
+    tags: ['ancient', 'pictographic', 'Minoan', 'alien', 'rune-like', 'symbols'],
+    note: 'Aegean numbers and ancient numeral symbols. The unfamiliar glyph shapes read as alien or archaic writing systems.',
+    chars: fromRange(0x10100, 0x1013F),
+    sequences: []
+  },
+
+  // ── VARIATION SELECTORS / TECHNICAL COMBINING
+  {
+    id: 'transport', title: 'Misc Pictographs (selection)', range: 'U+1F300–1F5FF (curated)',
+    tags: ['weather', 'objects', 'nature', 'status icons', 'pictographic'],
+    note: 'Curated subset from Miscellaneous Symbols and Pictographs — weather, elemental, and status icons most useful for games.',
+    chars: [
+      ...fromRange(0x1F300, 0x1F320), // weather/nature
+      ...fromRange(0x1F330, 0x1F335), // plants
+      ...fromRange(0x1F340, 0x1F343), // plants
+      ...fromRange(0x1F30D, 0x1F315), // globe/moon
+      ...fromRange(0x1F525, 0x1F52F), // fire/tools
+      ...fromRange(0x1F4A5, 0x1F4AB), // collision/stars
+      ...fromRange(0x1F494, 0x1F49F), // hearts
+      ...fromRange(0x1F480, 0x1F488), // misc
+      ...fromRange(0x1F4A7, 0x1F4A9), // droplets
+    ],
+    sequences: [
+      { label: 'Explosions',   s: String.fromCodePoint(0x1F4A5,0x1F4AB,0x1F525,0x1F4A3) },
+      { label: 'Weather',      s: String.fromCodePoint(0x1F300,0x1F301,0x1F302,0x1F303,0x1F304,0x1F305,0x1F306,0x1F307,0x1F308) },
+    ]
+  },
+
+  // ── TIFINAGH (North African script — great alien texture)
+  {
+    id: 'tifinagh', title: 'Tifinagh', range: 'U+2D30–2D7F',
+    tags: ['Berber', 'alien', 'geometric', 'angular', 'North African', 'rune-like'],
+    note: 'Tifinagh is a North African script with highly geometric, angular letterforms. Reads as alien/runic to western eyes. Great texture filler.',
+    chars: fromRange(0x2D30, 0x2D7F),
+    sequences: [
+      { label: 'Sample',       s: 'ⵠⵡⵢⵣⵤⵥⵦⵧⵙⵚⵛⵜⵝⵞⵟⵎⵏⵐⵑⵒⵓⵔⵕⵖ' },
+    ]
+  },
+
+  // ── VAI SYLLABARY (angular pictographic)
+  {
+    id: 'vai', title: 'Vai Syllabary (selection)', range: 'U+A500–A63F',
+    tags: ['West African', 'pictographic', 'angular', 'alien-looking', 'syllabary'],
+    note: 'Vai syllabary from Liberia — pictographic origins make these look like tiny icons. Unique alien-script texture for glitch overlays.',
+    chars: fromRange(0xA500, 0xA60C),
+    sequences: []
+  },
+
+  // ── GEORGIAN (ornamental letterforms)
+  {
+    id: 'georgian', title: 'Georgian Script (selection)', range: 'U+10A0–10FF',
+    tags: ['Georgian', 'Caucasian', 'ornamental', 'circular', 'alien', 'curved glyphs'],
+    note: 'Georgian Mkhedruli script has highly distinctive rounded letterforms unlike any Latin alphabet. Great for alien or archaic-look overlays.',
+    chars: fromRange(0x10D0, 0x10FA),
+    sequences: [
+      { label: 'Sample',       s: 'ქართული ანბანი' },
+    ]
+  },
+
+  // ── ETHIOPIC (dense grid filler)
+  {
+    id: 'ethiopic', title: 'Ethiopic (Ge\'ez) selection', range: 'U+1200–137F',
+    tags: ['Ethiopic', 'Ge\'ez', 'Amharic', 'dense', 'complex glyphs', 'texture fill'],
+    note: 'Ethiopic/Ge\'ez syllabary has complex, visually dense glyphs. Excellent texture filler for noise and distortion effects.',
+    chars: fromRange(0x1200, 0x1248),
+    sequences: []
+  },
+
+];
+
+// ── Build UI ────────────────────────────────────────────────────────────
+
+const filterBar = document.getElementById('filters');
+const grid = document.getElementById('grid');
+
+// All button
+const allBtn = document.createElement('button');
+allBtn.className = 'filter-btn active';
+allBtn.textContent = 'All';
+allBtn.dataset.filter = 'all';
+filterBar.appendChild(allBtn);
+
+GROUPS.forEach(function(g) {
+  const btn = document.createElement('button');
+  btn.className = 'filter-btn';
+  btn.textContent = g.title;
+  btn.dataset.filter = g.id;
+  filterBar.appendChild(btn);
+});
+
+let activeFilter = 'all';
+let searchQuery = '';
+const LARGE_THRESHOLD = 80;
+
+function updateVisibility() {
+  const cards = document.querySelectorAll('.card');
+  let visible = 0;
+  cards.forEach(function(card) {
+    const id = card.dataset.id;
+    const group = GROUPS.find(function(g) { return g.id === id; });
+    const matchFilter = activeFilter === 'all' || id === activeFilter;
+    const q = searchQuery.toLowerCase();
+    const matchSearch = !q
+      || group.title.toLowerCase().includes(q)
+      || group.tags.some(function(t) { return t.toLowerCase().includes(q); })
+      || (group.note && group.note.toLowerCase().includes(q));
+    const show = matchFilter && matchSearch;
+    card.classList.toggle('hidden', !show);
+    if (show) visible++;
+  });
+  document.getElementById('stats').textContent = visible + ' of ' + GROUPS.length + ' categories';
+}
+
+filterBar.addEventListener('click', function(e) {
+  const btn = e.target.closest('.filter-btn');
+  if (!btn) return;
+  document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  activeFilter = btn.dataset.filter;
+  updateVisibility();
+});
+
+document.getElementById('search').addEventListener('input', function(e) {
+  searchQuery = e.target.value;
+  // Activate All if filtering by text
+  document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.querySelector('[data-filter="all"]').classList.add('active');
+  activeFilter = 'all';
+  updateVisibility();
+});
+
+// Toast
+let toastTimeout;
+function showToast(displayChar, msg) {
+  document.getElementById('toast-char').textContent = displayChar;
+  document.getElementById('toast-msg').textContent = msg || 'Copied!';
+  const toast = document.getElementById('toast');
+  toast.classList.add('show');
+  clearTimeout(toastTimeout);
+  toastTimeout = setTimeout(function() { toast.classList.remove('show'); }, 1500);
+}
+
+function copyText(text, display) {
+  navigator.clipboard.writeText(text).catch(function() {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+  });
+  showToast(display || text.slice(0, 3), 'Copied!');
+}
+
+// Build cards
+let totalChars = 0;
+GROUPS.forEach(function(g) {
+  totalChars += g.chars.length;
+
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.dataset.id = g.id;
+
+  // Header row
+  const hdr = document.createElement('div');
+  hdr.className = 'card-header';
+
+  const title = document.createElement('div');
+  title.className = 'card-title';
+  title.textContent = g.title;
+
+  const meta = document.createElement('div');
+  meta.className = 'card-meta';
+
+  const rangeLabel = document.createElement('span');
+  rangeLabel.className = 'range-label';
+  rangeLabel.textContent = g.range;
+
+  const countLabel = document.createElement('span');
+  countLabel.className = 'char-count';
+  countLabel.textContent = g.chars.length + ' chars';
+
+  const copyAllBtn = document.createElement('button');
+  copyAllBtn.className = 'copy-all-btn';
+  copyAllBtn.textContent = 'copy all';
+  copyAllBtn.title = 'Copy all characters in this group';
+  copyAllBtn.addEventListener('click', function() {
+    const rawChars = g.chars.map(function(c) {
+      return (c.length > 1 && c[0] === '◌') ? c.slice(1) : c;
+    }).join('');
+    copyText(rawChars, g.chars[0]);
+    copyAllBtn.textContent = '✓ copied';
+    setTimeout(function() { copyAllBtn.textContent = 'copy all'; }, 1200);
+  });
+
+  meta.appendChild(rangeLabel);
+  meta.appendChild(countLabel);
+  meta.appendChild(copyAllBtn);
+  hdr.appendChild(title);
+  hdr.appendChild(meta);
+  card.appendChild(hdr);
+
+  // Tags
+  const tags = document.createElement('div');
+  tags.className = 'tags';
+  g.tags.forEach(function(t) {
+    const tag = document.createElement('span');
+    tag.className = 'tag';
+    tag.textContent = t;
+    tags.appendChild(tag);
+  });
+  card.appendChild(tags);
+
+  // Note
+  if (g.note) {
+    const note = document.createElement('div');
+    note.className = 'use-note';
+    note.textContent = g.note;
+    card.appendChild(note);
+  }
+
+  // Font note
+  if (g.fontNote) {
+    const fn = document.createElement('div');
+    fn.className = 'font-note';
+    fn.textContent = '⚠ ' + g.fontNote;
+    card.appendChild(fn);
+  }
+
+  // Char wrap
+  const charsWrap = document.createElement('div');
+  charsWrap.className = 'chars-wrap';
+  if (g.chars.length > LARGE_THRESHOLD) charsWrap.classList.add('collapsed');
+
+  const charsEl = document.createElement('div');
+  charsEl.className = 'chars';
+
+  g.chars.forEach(function(c) {
+    const span = document.createElement('span');
+    span.className = 'ch';
+    span.textContent = c;
+    // Determine if combining (shown with ◌ placeholder)
+    const isCombining = c.length > 1 && c[0] === '◌';
+    const rawChar = isCombining ? c.slice(1) : c;
+    const cp = rawChar.codePointAt(0);
+    const hex = cp.toString(16).toUpperCase();
+    const uLabel = 'U+' + (hex.length > 4 ? hex : hex.padStart(4, '0'));
+    span.title = uLabel + (isCombining ? ' (combining — ◌ placeholder)' : '') + ' — click to copy';
+    span.addEventListener('click', function() {
+      copyText(rawChar, c);
+      span.classList.remove('pop');
+      void span.offsetWidth;
+      span.classList.add('pop');
+    });
+    charsEl.appendChild(span);
+  });
+
+  charsWrap.appendChild(charsEl);
+  card.appendChild(charsWrap);
+
+  // Expand button for large groups
+  if (g.chars.length > LARGE_THRESHOLD) {
+    const expandBtn = document.createElement('button');
+    expandBtn.className = 'expand-btn';
+    expandBtn.textContent = 'Show all ' + g.chars.length + ' characters ▾';
+    expandBtn.addEventListener('click', function() {
+      charsWrap.classList.remove('collapsed');
+      expandBtn.style.display = 'none';
+    });
+    card.appendChild(expandBtn);
+  }
+
+  // Sequences
+  if (g.sequences && g.sequences.length > 0) {
+    const seqs = document.createElement('div');
+    seqs.className = 'seqs';
+
+    const seqTitle = document.createElement('div');
+    seqTitle.className = 'seqs-title';
+    seqTitle.textContent = 'Animation sequences';
+    seqs.appendChild(seqTitle);
+
+    g.sequences.forEach(function(seq) {
+      const row = document.createElement('div');
+      row.className = 'seq-row';
+
+      const lbl = document.createElement('span');
+      lbl.className = 'seq-label';
+      lbl.textContent = seq.label;
+
+      const sc = document.createElement('span');
+      sc.className = 'seq-chars';
+      sc.textContent = seq.s;
+      sc.title = 'Click to copy sequence';
+      sc.addEventListener('click', function() {
+        copyText(seq.s, seq.s.slice(0, 4) + '…');
+      });
+
+      row.appendChild(lbl);
+      row.appendChild(sc);
+      seqs.appendChild(row);
+    });
+
+    card.appendChild(seqs);
+  }
+
+  grid.appendChild(card);
+});
+
+// Stats
+const statStr = GROUPS.length + ' categories · ' + totalChars.toLocaleString() + ' characters';
+document.getElementById('stats').textContent = statStr;
+document.getElementById('footer-total').textContent = statStr + ' total';
+</script>
+</body>
+</html>
